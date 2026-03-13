@@ -1,0 +1,48 @@
+/* AppHeader.css — 作用域前缀 .hd- */
+
+.hd-root {
+  height: 54px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  gap: 10px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  -webkit-box-shadow: var(--shadow-sm);
+          box-shadow: var(--shadow-sm);
+}
+
+.hd-logo {
+  width: 32px; height: 32px;
+  background: var(--primary);
+  border-radius: var(--r-md);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+
+.hd-title { font-size: 15px; font-weight: 600; }
+.hd-sep   { color: var(--border); font-size: 20px; font-weight: 200; line-height: 1; }
+.hd-sub   { font-size: 13px; color: var(--muted); }
+
+.hd-badge {
+  font-size: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 3px 12px;
+  color: var(--muted);
+}
+.hd-badge strong { color: var(--text); }

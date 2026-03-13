@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>任务板</title>
+
+  <script src="lib/core-js-minified.js"></script>
+  <script src="lib/fetch.umd.min.js"></script>
+  <script src="lib/vue2.7.16.min.js"></script>
+
+  <link rel="stylesheet" href="styles/base.css">
+
+  <style>
+    .page { max-width: 680px; margin: 0 auto; padding: 24px 20px 64px; }
+    .task-list {
+      display: -ms-flexbox; display: flex;
+      -ms-flex-direction: column; flex-direction: column;
+      gap: 10px; margin-top: 20px;
+    }
+    .toolbar {
+      display: -ms-flexbox; display: flex;
+      -ms-flex-align: center; align-items: center;
+      gap: 8px; margin-bottom: 4px;
+    }
+    .filter-btn {
+      background: transparent; border: 1px solid var(--border);
+      border-radius: 20px; padding: 4px 14px; font-size: 12px;
+      font-weight: 500; cursor: pointer; color: var(--muted);
+      font-family: var(--font);
+      -webkit-transition: all .15s; transition: all .15s;
+    }
+    .filter-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .count { font-size: 12px; color: var(--hint); margin-left: auto; }
+    .empty { text-align: center; padding: 48px 16px; color: var(--hint); font-size: 13px; }
+  </style>
+</head>
+<body>
+
+<!--
+  index.html 里没有任何组件模板和组件 script 标签。
+  模板在各组件的 template.html 里，由 text 插件自动加载。
+  新增组件只需修改 components/index.js，这里永远不用动。
+-->
+
+<div id="app">
+  <app-header
+    v-bind:title="'我的项目'"
+    v-bind:pending-count="pendingCount"
+    v-bind:done-count="doneCount"
+    v-on:add="showModal = true"
+  ></app-header>
+
+  <div class="page">
+    <div class="toolbar">
+      <button class="filter-btn" v-bind:class="{ active: filter === 'all' }"  v-on:click="filter = 'all'">全部</button>
+      <button class="filter-btn" v-bind:class="{ active: filter === 'todo' }" v-on:click="filter = 'todo'">待处理</button>
+      <button class="filter-btn" v-bind:class="{ active: filter === 'done' }" v-on:click="filter = 'done'">已完成</button>
+      <span class="count">共 {{ filteredTasks.length }} 条</span>
+    </div>
+    <div class="task-list" v-if="filteredTasks.length > 0">
+      <task-card
+        v-for="task in filteredTasks"
+        v-bind:key="task.id"
+        v-bind:task="task"
+        v-on:toggle="toggleTask"
+        v-on:remove="removeTask"
+      ></task-card>
+    </div>
+    <div class="empty" v-else>暂无任务，点击右上角「新建任务」开始</div>
+  </div>
+
+  <add-modal
+    v-if="showModal"
+    v-on:submit="addTask"
+    v-on:close="showModal = false"
+  ></add-modal>
+</div>
+
+<script src="lib/require.js" data-main="main"></script>
+
+</body>
+</html>

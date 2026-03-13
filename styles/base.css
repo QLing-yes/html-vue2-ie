@@ -1,0 +1,95 @@
+/* base.css — 全局变量 + 通用样式 */
+
+*, *::before, *::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0; padding: 0;
+}
+
+:root {
+  --bg:        #f5f4f0;
+  --surface:   #ffffff;
+  --border:    #e4e2da;
+  --text:      #1c1c1a;
+  --muted:     #6b6b67;
+  --hint:      #a8a8a3;
+  --primary:   #2563eb;
+  --primary-d: #1d4ed8;
+  --primary-l: #eff6ff;
+  --success:   #16a34a;
+  --success-l: #f0fdf4;
+  --warn:      #d97706;
+  --warn-l:    #fffbeb;
+  --danger:    #dc2626;
+  --danger-l:  #fef2f2;
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.10);
+  --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+html, body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* --- 按钮 --- */
+.btn {
+  display: inline-block;
+  padding: 7px 16px;
+  border-radius: var(--r-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--font);
+  -webkit-transition: background .15s;
+          transition: background .15s;
+}
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-d); }
+.btn-ghost   { background: transparent; color: var(--muted); border-color: var(--border); }
+.btn-ghost:hover { background: var(--bg); }
+
+/* --- 输入框 --- */
+.input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  font-size: 14px;
+  font-family: var(--font);
+  background: var(--surface);
+  color: var(--text);
+  outline: none;
+  -webkit-appearance: none;
+          appearance: none;
+}
+.input:focus { border-color: var(--primary); }
+
+/* --- Flex 工具（含 IE11 -ms- 前缀）--- */
+.flex { display: -ms-flexbox; display: flex; }
+.flex-col  { -ms-flex-direction: column; flex-direction: column; }
+.items-center { -ms-flex-align: center; align-items: center; }
+.flex-1 { -ms-flex: 1; flex: 1; min-width: 0; }
+.ml-auto { margin-left: auto; }
+
+/* --- 遮罩 --- */
+.overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 200;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  padding: 16px;
+}
